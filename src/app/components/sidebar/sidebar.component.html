@@ -1,0 +1,16 @@
+<aside class="sidebar" [class.open]="isOpen">
+  <div class="sidebar-header">
+    <h1 *ngIf="isOpen">HR Manager</h1>
+  </div>
+
+  <nav class="sidebar-nav">
+    <button 
+      *ngFor="let item of navItems; let i = index"
+      class="nav-item"
+      [class.active]="item.active"
+      (click)="setActive(i)">
+      <span class="nav-icon">{{ item.icon }}</span>
+      <span class="nav-label" *ngIf="isOpen">{{ item.label }}</span>
+    </button>
+  </nav>
+</aside>

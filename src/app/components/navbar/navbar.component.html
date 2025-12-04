@@ -1,0 +1,55 @@
+<header class="navbar">
+  <div class="navbar-content">
+    <div class="navbar-left">
+      <button class="menu-btn" (click)="toggleSidebar()">
+        <span class="menu-icon">☰</span>
+      </button>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          placeholder="Search employees, reports..."
+          [(ngModel)]="searchQuery"
+          class="search-input">
+      </div>
+    </div>
+
+    <div class="navbar-right">
+      <!-- Notifications -->
+      <div class="dropdown-container">
+        <button class="icon-btn" (click)="toggleNotifications()">
+          <span class="bell-icon">🔔</span>
+          <span class="notification-badge"></span>
+        </button>
+
+        <div class="dropdown-menu" *ngIf="notificationOpen">
+          <div class="dropdown-header">
+            <h3>Notifications</h3>
+          </div>
+          <div class="dropdown-content">
+            <div class="notification-item" *ngFor="let i of [1,2,3]">
+              <p class="notification-title">New leave request</p>
+              <p class="notification-time">2 hours ago</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Dropdown -->
+      <div class="dropdown-container">
+        <button class="user-btn" (click)="toggleUserDropdown()">
+          <div class="user-avatar">JD</div>
+          <span class="user-name">John Doe</span>
+          <span class="chevron">▼</span>
+        </button>
+
+        <div class="dropdown-menu user-menu" *ngIf="userDropdownOpen">
+          <button class="dropdown-item" *ngFor="let item of ['Profile', 'Settings', 'Logout']">
+            {{ item }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

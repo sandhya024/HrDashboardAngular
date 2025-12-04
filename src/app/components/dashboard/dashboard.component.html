@@ -1,0 +1,91 @@
+<main class="dashboard">
+  <div class="dashboard-header">
+    <h2>Dashboard Overview</h2>
+    <p>Welcome back! Here's what's happening today.</p>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <div class="stat-card" *ngFor="let stat of statCards">
+      <div class="stat-header">
+        <div class="stat-icon {{ stat.color }}">
+          <span>{{ stat.icon === 'users' ? '👥' : stat.icon === 'briefcase' ? '💼' : stat.icon === 'clock' ? '🕐' : '📈' }}</span>
+        </div>
+        <span class="stat-change">{{ stat.change }}</span>
+      </div>
+      <h3>{{ stat.label }}</h3>
+      <p class="stat-value">{{ stat.value }}</p>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <!-- Performance Chart -->
+    <div class="chart-card">
+      <h3>Performance Trends</h3>
+      <div class="chart-container">
+        <canvas baseChart
+                [data]="lineChartData"
+                [options]="lineChartOptions"
+                type="line">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="activity-card">
+      <h3>Recent Activity</h3>
+      <div class="activity-list">
+        <div class="activity-item" *ngFor="let activity of recentActivities">
+          <div class="activity-indicator"></div>
+          <div class="activity-content">
+            <p class="activity-action">{{ activity.action }}</p>
+            <p class="activity-user">{{ activity.user }}</p>
+            <p class="activity-time">{{ activity.time }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Employee Table -->
+  <div class="table-card">
+    <div class="table-header">
+      <h3>Employee Directory</h3>
+    </div>
+    <div class="table-container">
+      <table class="employee-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Status</th>
+            <th>Performance</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees">
+            <td>
+              <div class="employee-info">
+                <div class="employee-avatar">{{ getInitials(emp.name) }}</div>
+                <span class="employee-name">{{ emp.name }}</span>
+              </div>
+            </td>
+            <td>{{ emp.role }}</td>
+            <td>{{ emp.department }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="getStatusClass(emp.status)">
+                {{ emp.status }}
+              </span>
+            </td>
+            <td>{{ emp.performance }}</td>
+            <td>
+              <button class="action-btn">⋮</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
